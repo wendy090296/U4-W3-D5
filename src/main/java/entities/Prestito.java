@@ -1,23 +1,35 @@
 package entities;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
+@Entity
+@Table( name = "prestiti")
 public class Prestito {
     //ATTRIBUTI
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id; // PK
+    @ManyToOne // + prestiti possono essere erogati ad 1 utente;
+    @JoinColumn(name ="utente")
     private Utente utente;
-    private Biblioteca elementoPrestato;
+    @OneToOne
+    private ElementoEditoriale elementoEditoriale;
+    @Column(name = "inizio_prestito")
     private LocalDate dataInizioPrestito;
+    @Column(name = "prevista_restituzione")
     private LocalDate dataPrevistaRest;
+    @Column(name = "effettiva_restituzione")
     private LocalDate dataEffettivaRest;
+
 
     //COSTRUTTORE
 
-
-    public Prestito(Utente utente, Biblioteca elementoPrestato, LocalDate dataInizioPrestito, LocalDate dataPrevistaRest, LocalDate dataEffettivaRest) {
+    public Prestito(Utente utente, ElementoEditoriale elementoEditoriale, LocalDate dataInizioPrestito, LocalDate dataPrevistaRest, LocalDate dataEffettivaRest) {
         this.utente = utente;
-        this.elementoPrestato = elementoPrestato;
+        this.elementoEditoriale = elementoEditoriale;
         this.dataInizioPrestito = dataInizioPrestito;
-        this.dataPrevistaRest = dataPrevistaRest;
+        this.dataPrevistaRest = dataPrevistaRest.plusDays(30);
         this.dataEffettivaRest = dataEffettivaRest;
     }
 
@@ -32,12 +44,12 @@ public class Prestito {
         this.utente = utente;
     }
 
-    public Biblioteca getElementoPrestato() {
-        return elementoPrestato;
+    public ElementoEditoriale getElementoEditoriale() {
+        return elementoEditoriale;
     }
 
-    public void setElementoPrestato(Biblioteca elementoPrestato) {
-        this.elementoPrestato = elementoPrestato;
+    public void setElementoPrestato(ElementoEditoriale elementoEditoriale) {
+        this.elementoEditoriale = elementoEditoriale;
     }
 
     public LocalDate getDataInizioPrestito() {
@@ -62,5 +74,18 @@ public class Prestito {
 
     public void setDataEffettivaRest(LocalDate dataEffettivaRest) {
         this.dataEffettivaRest = dataEffettivaRest;
+    }
+
+    @Override
+    public String toString() {
+        return "Prestito{" +
+                "id=" + id +
+                ", utente=" + utente +
+                ", elementoPrestato=" + elementoEditoriale +
+                ", dataInizioPrestito=" + dataInizioPrestito +
+                ", dataPrevistaRest=" + dataPrevistaRest +
+                ", dataEffettivaRest=" + dataEffettivaRest +
+
+                '}';
     }
 }

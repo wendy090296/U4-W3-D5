@@ -1,16 +1,28 @@
 package entities;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
+@Entity
+@Table(name ="utenti" )
 public class Utente {
     //ATTRIBUTI
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY) // valore dell'ID generato in automatico;
+    private int id;
+   @Column(name = "numero_tessera")
+    private long numeroTessera; // PK
+
     private String nome;
     private String cognome;
+    @Column(name = "data_di_nascita")
     private LocalDate dataDiNascita;
-    private long numeroTessera;
+    @OneToMany(mappedBy = "utente") // 1 utente puo' richiedere più prestiti; relazione bidirezionale!
+    private List<Prestito> prestiti;
 
-    //COSTRUTTORE
-
+    //COSTRUTTORI
 
     public Utente(String nome, String cognome, LocalDate dataDiNascita, long numeroTessera) {
         this.nome = nome;
@@ -21,6 +33,10 @@ public class Utente {
 
     //GETTERS E SETTERS
 
+
+    public int getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
@@ -52,5 +68,16 @@ public class Utente {
 
     public void setNumeroTessera(long numeroTessera) {
         this.numeroTessera = numeroTessera;
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "id=" + id +
+                ", numeroTessera=" + numeroTessera +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", dataDiNascita=" + dataDiNascita +
+                '}';
     }
 }

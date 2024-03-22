@@ -2,19 +2,30 @@ package entities;
 
 
 import enumerated.Periodicità;
+import jakarta.persistence.*;
 
-public class Riviste extends Biblioteca {
+@Entity
+@Table(name = "riviste")
+public class Rivista extends ElementoEditoriale {
+    //ATTRIBUTI
+
+    @Enumerated(EnumType.STRING)
         private Periodicità periodicità;
 
-        public Riviste(long ISBN, String titolo, int annoPubblicazione, int numeroPagine, Periodicità periodicità) {
-            super(ISBN, titolo, annoPubblicazione, numeroPagine);
+    //COSTRUTTORI
+
+public Rivista(){}
+
+
+    public Rivista(long ISBN, String titolo, int annoPubblicazione, int numeroPagine, Periodicità periodicità) {
+            super(ISBN,titolo, annoPubblicazione, numeroPagine);
             this.periodicità=periodicità;
 
         }
 
         @Override
         public String toString() {
-            return "entities.Riviste{" +
+            return "Rivista{" +
                     "periodicità=" + periodicità +
                     ", ISBN=" + ISBN +
                     ", titolo='" + titolo + '\'' +
