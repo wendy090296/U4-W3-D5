@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "catalogo")
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQuery(name = "findByYear", query = "SELECT el FROM ElementoBibliografico el WHERE EXTRACT(YEAR FROM el.anno_pubblicazione) = :anno")
-@NamedQuery(name = "findByAuthor", query = "SELECT el FROM Libro el WHERE LOWER(el.autore) LIKE LOWER(CONCAT('%', :autore, '%' ")
+@NamedQuery(name = "findByAuthor", query = "SELECT l FROM Libro l WHERE LOWER(el.autore) LIKE LOWER(CONCAT('%', :autore, '%' ")
 @NamedQuery(name = "findByTitle", query = "SELECT el FROM ElementoEditoriale el  WHERE LOWER(el.titolo) LIKE LOWER(CONCAT('%', :titolo, '%'))")
 public  class ElementoEditoriale {
     // ATTRIBUTI

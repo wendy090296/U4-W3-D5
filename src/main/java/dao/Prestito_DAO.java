@@ -44,7 +44,7 @@ public class Prestito_DAO {
     }
 
     public List<Prestito> expiredLoans (LocalDate localDate){
-        TypedQuery<Prestito> query = em.createQuery("SELECT p FROM p WHERE p.dataEffettivaRest IS NULL",Prestito.class);
+        TypedQuery<Prestito> query = em.createQuery("SELECT p FROM Prestito p WHERE p.dataEffettivaRest IS NULL",Prestito.class);
         query.setParameter("LocalDate",localDate);
         return query.getResultList();
     }
