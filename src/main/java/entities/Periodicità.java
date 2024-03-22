@@ -1,4 +1,4 @@
-package enumerated;
+package entities;
 
 
     public enum Periodicità {

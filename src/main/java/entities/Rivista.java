@@ -1,7 +1,6 @@
 package entities;
 
 
-import enumerated.Periodicità;
 import jakarta.persistence.*;
 
 @Entity
