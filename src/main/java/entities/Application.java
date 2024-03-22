@@ -85,7 +85,7 @@ public class Application {
         System.out.println(pdao.findLoanByCardNumUser(779024315));
 
         // RICERCA PRESTITI SCADUTI E NON RESTITUITI
-        System.out.println(pdao.expiredLoans(LocalDate.of(2024,9,30)));
+        System.out.println(pdao.expiredLoans(LocalDate.now()));
 
 
 
